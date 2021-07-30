@@ -24,6 +24,10 @@ class JoinView(RedirectView):
 
         if join.exists():
             join.delete()
+            project.count -= 1
         else:
             Join(user=user, project=project).save()
+            project.count += 1
+
+        project.save()
         return super(JoinView, self).get(request, *args, **kwargs)
