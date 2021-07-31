@@ -9,7 +9,7 @@ class Project(models.Model):
     image2 = models.ImageField(upload_to='project/', null=False)
     image3 = models.ImageField(upload_to='project/', null=False)
 
-    content = models.TextField(null=False)#내용도 꼭 있도록 null=False
+    content = models.TextField(null=True)#내용도 꼭 있도록 null=False
 
     PERSON_CHOICES = [('1', '1명'), ('2', '2명'), ('3', '3명'), ('4', '4명'), ('5', '5명'), ('6', '6명')]
     personnel = models.CharField(max_length=2, choices=PERSON_CHOICES, default='1')
