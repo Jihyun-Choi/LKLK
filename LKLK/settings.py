@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'projectapp',
     'joinapp',
     'feedapp',
+    'teamapp',
 
     'django.contrib.sites',
     'allauth',
