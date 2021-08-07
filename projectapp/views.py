@@ -11,6 +11,8 @@ from joinapp.models import Join
 from projectapp.decorators import project_ownership_required
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
+from teamapp.models import Team
+
 
 @method_decorator(login_required, 'get')
 @method_decorator(login_required, 'post')
@@ -38,12 +40,16 @@ class ProjectDetailView(DetailView):
         project = self.object
         user = self.request.user
         join_list = Join.objects.all()
+
+        #join, team이 보이는 조건
         if user.is_authenticated:
             join = Join.objects.filter(user=user, project=project)
+            team = Team.objects.filter(user=project.writer, project=project)
         else:
             join = None
+            team = None
 
-        return super(ProjectDetailView, self).get_context_data(join_list=join_list, join=join, **kwargs)
+        return super(ProjectDetailView, self).get_context_data(join_list=join_list, join=join, team=team, **kwargs)
 
 
 @method_decorator(project_ownership_required, 'get')

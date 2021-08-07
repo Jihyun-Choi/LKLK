@@ -61,17 +61,36 @@
                             {{ join.user }}
 
 <!--                            지원 수락 거절 만들기 -->
+<!--                            project pk와 user pk를 teamapp으로 전달-->
+                            <a href="{% url 'teamapp:team' %}?project_pk={{ target_project.pk }}&user={{join.user.pk}}"
+                                class="btn btn-primary rounded-pill px-4">
+                                Accept
+                            </a>
 
                         </h4>
                     </a>
                 </div>
                 {% endif %}
             {% endfor %}
-        <hr>
+    <hr>
+        <div>
             <h4>Team members List</h4>
+            {% for object in team %}
+                {{object.member1}}<br>
+                {{object.member2}}<br>
+                {{object.member3}}<br>
+                {{object.member4}}<br>
+                {{object.member5}}<br>
+            {% endfor %}
+        </div>
 
-
-
+        <div>
+            <h4>Team SNS</h4>
+            <a href="{% url 'feedapp:list' %}?project_pk={{ target_project.pk }}&user_pk={{ user.pk }}"
+                class="btn btn-primary rounded-pill px-4">
+                Feeds
+            </a>
+        </div>
         {% endif %}
 
 
