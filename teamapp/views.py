@@ -28,7 +28,6 @@ class TeamView(RedirectView):
         if join.exists():
             join.delete()
 
-
         #필터링 된 팀 객체를 변수에 받아옴
         team = Team.objects.filter(user=project.writer, project=project)
 

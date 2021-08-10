@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class="container"  >
+    <a href="{% url 'feedapp:create' %}">post</a>
     {% for post in post_list %}
         <div  class="detail_page detail_component">
           <a href="{% url 'feedapp:detail' pk=post.pk%}" class="size4-link">{{post.title}}</a>
@@ -13,8 +14,31 @@
             <div class="text-label big">글쓴이 :</div>
             <div class="text-label date">{{post.writer}}</div>
           </div>
-          <div class="paragraph-70">{{post.image | safe }}{{post.content | safe}} ...</div>
+          <div class="paragraph-70">{{post.content | safe}}</div>
         </div>
+    {% endfor %}
+
+    <h1> 글쓰기 </h1>
+    user: {{User}}<br>
+    project: {{project}}<br>
+    team: {{team}}
+    {% for object in team %}
+        {{object.user}}
+    {% endfor %}
+    <hr>
+    <br>
+    프로젝트 이름 : {{project_name}}<br>
+    프로젝트 등록 인원 : <br>
+    {% for join in join_list %}
+        {% if join.project.title == project_name %}
+            {{join.user}}<br>
+        {% endif %}
+    {% endfor %}
+    프로젝트 내용 :
+    {% for join in join_list %}
+        {% if join.project.title == project_name %}
+            {{join.project.content}}
+        {% endif %}
     {% endfor %}
 
 

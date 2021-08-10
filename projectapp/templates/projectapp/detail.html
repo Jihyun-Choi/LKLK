@@ -96,6 +96,7 @@
 
     <!--        로그인 한 경우 join버튼 구현 완료, 추후 프로젝트 만든 사람의 오픈카톡링크 -->
         <div class="text-center mb-5">
+
             {% if user.is_authenticated and target_project.writer != user %}
                 {% if not join %}
                 <a href="{% url 'joinapp:join' %}?project_pk={{ target_project.pk }}"
