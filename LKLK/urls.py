@@ -30,6 +30,7 @@ urlpatterns = [
     path('joins/', include('joinapp.urls')),
     path('feeds/', include('feedapp.urls')),
     path('teams/', include('teamapp.urls')),
+    path('comments/', include('commentapp.urls')),
 
     path('accounts/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

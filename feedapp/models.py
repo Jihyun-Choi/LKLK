@@ -12,7 +12,9 @@ class Feed(models.Model):
     title = models.CharField(max_length=200, null=True)
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='feed', null=True)
-    image = models.ImageField(upload_to='feed/', null=False)
     content = RichTextField(null=True)
+
+    #CK에디터에서 사진을 넣을 수 있으므로 대체
+    #image = models.ImageField(upload_to='feed/', null=True)
 
     created_at = models.DateField(auto_now_add=True, null=True)

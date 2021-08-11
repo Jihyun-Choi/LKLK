@@ -14,6 +14,7 @@ class Project(models.Model):
     PERSON_CHOICES = [('1', '1명'), ('2', '2명'), ('3', '3명'), ('4', '4명'), ('5', '5명'), ('6', '6명')]
     personnel = models.CharField(max_length=2, choices=PERSON_CHOICES, default='1')
 
+
     created_at = models.DateField(auto_now_add=True, null=True)
 
     count = models.IntegerField(default=0)

@@ -72,7 +72,7 @@
                 </div>
                 {% endif %}
             {% endfor %}
-    <hr>
+
         <div>
             <h4>Team members List</h4>
             {% for object in team %}
@@ -84,13 +84,6 @@
             {% endfor %}
         </div>
 
-        <div>
-            <h4>Team SNS</h4>
-            <a href="{% url 'feedapp:list' %}?project_pk={{ target_project.pk }}&user_pk={{ user.pk }}"
-                class="btn btn-primary rounded-pill px-4">
-                Feeds
-            </a>
-        </div>
         {% endif %}
 
 
@@ -113,13 +106,20 @@
         </div>
 
 <!--        추후 join list 팝업으로 띄우기-->
+    <hr>
         <div>
             <p>프로젝트 모집 인원: {{ target_project.get_personnel_display }}</p>
             <p>모집한 인원: </p>
             <p>현재 지원자: {{ target_project.count }} </p>
         </div>
 
-
+        <div>
+            <h4>Team SNS</h4>
+                <a href="{% url 'feedapp:list' %}?project_pk={{ target_project.pk }}"
+                    class="btn btn-primary rounded-pill px-4">
+                    Feeds
+                </a>
+        </div>
         <hr>
         <a href="{% url 'home' %}">
             <p>다른 프로젝트 보기</p>

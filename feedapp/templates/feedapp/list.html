@@ -4,43 +4,64 @@
 
 <div class="container"  >
     <a href="{% url 'feedapp:create' %}">post</a>
-    {% for post in post_list %}
-        <div  class="detail_page detail_component">
-          <a href="{% url 'feedapp:detail' pk=post.pk%}" class="size4-link">{{post.title}}</a>
-          <div class="date_detail">
-            <div class="text-label big">게시일 :</div>
-            <div class="text-label date">{{post.created_at}}</div>
-            <div class="nav-kit-divider"></div>
-            <div class="text-label big">글쓴이 :</div>
-            <div class="text-label date">{{post.writer}}</div>
-          </div>
-          <div class="paragraph-70">{{post.content | safe}}</div>
-        </div>
-    {% endfor %}
+<!--    {% for post in post_list %}-->
+<!--        <div  class="detail_page detail_component">-->
+<!--          <a href="{% url 'feedapp:detail' pk=post.pk%}" class="size4-link">{{post.title}}</a>-->
+<!--          <div class="date_detail">-->
+<!--            <div class="text-label big">게시일 :</div>-->
+<!--            <div class="text-label date">{{post.created_at}}</div>-->
+<!--            <div class="nav-kit-divider"></div>-->
+<!--            <div class="text-label big">글쓴이 :</div>-->
+<!--            <div class="text-label date">{{post.writer}}</div>-->
+<!--          </div>-->
+<!--          <div class="paragraph-70">{{post.content | safe}}</div>-->
+<!--        </div>-->
+<!--    {% endfor %}-->
 
-    <h1> 글쓰기 </h1>
-    user: {{User}}<br>
-    project: {{project}}<br>
-    team: {{team}}
-    {% for object in team %}
-        {{object.user}}
-    {% endfor %}
-    <hr>
-    <br>
-    프로젝트 이름 : {{project_name}}<br>
-    프로젝트 등록 인원 : <br>
-    {% for join in join_list %}
-        {% if join.project.title == project_name %}
-            {{join.user}}<br>
-        {% endif %}
-    {% endfor %}
-    프로젝트 내용 :
-    {% for join in join_list %}
-        {% if join.project.title == project_name %}
-            {{join.project.content}}
-        {% endif %}
-    {% endfor %}
+    <h1> 프로젝트 정보 </h1>
+<!--    list는 이미 필터링 되어 있어서 한번만 돈다.-->
+<!--    프로젝트 정보 -->
+    {% for team in team_list %}
+        leader : {{team.project.writer}}<br>
+        team : {{team.member1}}<br>
+        team : {{team.member2}}<br>
+        team : {{team.member3}}<br>
+        team : {{team.member4}}<br>
+        team : {{team.member5}}<br>
+        <hr>
+        title : {{team.project.title}}<br>
+        created_at : {{team.project.created_at}}<br>
+        content : {{team.project.content}}<br>
+        <img src="{{team.project.image.url}}"><br>
+        <img src="{{team.project.image2.url}}"><br>
+        <img src="{{team.project.image3.url}}"><br>
+        <br><hr>
 
+        {% for comment in comment_list %}
+            {% if comment.feed is None %}
+                {% include 'commentapp/detail.html' with comment=comment %}
+            {% endif %}
+        {% endfor%}
+
+
+        <br><br>
+        <h3>프로젝트의 각 피드들</h3>
+        <!--    각 피드들-->
+        {% for feed in feed_list %}
+            제목 : {{feed.title}}  글쓴이 : {{feed.writer}}<hr>
+            {{feed.content | safe}}<hr>
+            {% include 'commentapp/create.html' with project=team.project feed=feed %}
+
+            <!--    각 피드의 댓글들     -->
+            {% for comment in comment_list %}
+                {% if comment.feed == feed %}
+                    {% include 'commentapp/detail.html' with comment=comment %}
+                {% endif %}
+            {% endfor%}
+        {% endfor %}
+        <hr>
+
+    {% endfor %}
 
 </div>
 

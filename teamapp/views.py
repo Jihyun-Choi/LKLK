@@ -28,6 +28,7 @@ class TeamView(RedirectView):
         if join.exists():
             join.delete()
 
+
         #필터링 된 팀 객체를 변수에 받아옴
         team = Team.objects.filter(user=project.writer, project=project)
 
@@ -50,12 +51,7 @@ class TeamView(RedirectView):
                     object.member5 = user
                 else:
                     pass
-                #elif object.member3 == None:
-                #    object.member3 = user
-                #elif object.member4 == None:
-                #    object.member4 = user
-                #elif object.member5 == None:
-                #    object.member5 = user
+
 
                 object.save()
 

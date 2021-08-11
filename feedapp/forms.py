@@ -6,4 +6,4 @@ from feedapp.models import Feed
 class FeedCreationForm(ModelForm):
     class Meta:
         model = Feed
-        fields = ['title', 'image', 'content']
+        fields = ['title',  'content']
